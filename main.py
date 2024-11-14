@@ -53,20 +53,20 @@ print(f"AUC Score: {auc_score:.4f}")
 best_threshold = tpr - fpr
 best_threshold_index = np.argmax(best_threshold)
 best_threshold = thresholds[best_threshold_index]
-print(f"Best Threshold (Lambda): {best_threshold:.4f}")
+print(f"Best Threshold (Lambda) value: {best_threshold:.4f}")
 
 cm = confusion_matrix(y_test, y_pred)
 tn, fp, fn, tp = cm.ravel()
-
-plt.figure(figsize=(6, 4))
-sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", cbar=False, xticklabels=["Not 1", "1"], yticklabels=["Not 1", "1"])
-plt.xlabel("Predicted Label")
-plt.ylabel("True Label")
-plt.title("Confusion Matrix")
-plt.show()
 
 sensitivity = tp / (tp + fn)
 specificity = tn / (tn + fp)
 
 print(f"Sensitivity (Recall): {sensitivity:.4f}")
 print(f"Specificity: {specificity:.4f}")
+
+plt.figure(figsize=(6, 6))
+sns.heatmap(cm, annot=True, fmt="g", cmap="Greens", cbar=False, xticklabels=["Not 1", "1"], yticklabels=["Not 1", "1"])
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+plt.title("Confusion Matrix of Digit Images")
+plt.show()
